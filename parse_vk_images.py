@@ -36,7 +36,7 @@ def enter_the_vk_groups(all_vk_groups):
 
 
 def isint(s):
-"""Проверка на число"""
+    """Проверка на число"""
     try:
 	int(s)
         return True
