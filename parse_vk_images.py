@@ -67,12 +67,10 @@ def transform_to_df(photo_request):
 	srcs = np.append(srcs, item['src']) # src == photo
 	owners = np.append(owners, int(abs(item['owner_id']))) # чтобы не ставилась "-" перед ID группы
     df = pd.DataFrame({
-	'Group': owners,
+	'Groups': owners,
 	'Photos': srcs
 	})
     return df
-
-
 
 
 def main():
