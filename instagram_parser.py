@@ -47,15 +47,20 @@ def parse_pets_owners_logins(folderpath):
     return owners_logins
 
 
-def download_owners_images(owners_logins):
+def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
     owner_num = 0
     for owner in owners_logins:
         owner_num += 1
         try:
+            i = 0 # We calculate only first 100 photos from account to make parsing faster
             profile = instaloader.Profile.from_username(L.context, "{}".format(owner))
             for post in profile.get_posts():
-                L.download_post(post, '{}'.format(owner_num))
+                i += 1
+                if i < num_of_pictures_per_profile:
+                    L.download_post(post, '{}'.format(owner_num))
+                else:
+                    break
         except:
             continue
     return None
@@ -65,7 +70,3 @@ def download_owners_images(owners_logins):
 
 owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/From')
 owners_images = download_owners_images(owners_logins)
-
-
-
-
