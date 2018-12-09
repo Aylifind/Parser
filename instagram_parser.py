@@ -24,7 +24,7 @@ def download_posts():
 
 def parse_pets_owners_logins(folderpath):
     """
-    Пробегаю по всем папкам папок и ищу среди них 
+    Пробегаю по всем папкам папок и ищу среди них логины в текстовых файлах, которые и буду парсить
     """
     owners_logins = np.empty(0)
     for dirpath, dirnames, filenames in os.walk(folderpath):
@@ -49,8 +49,8 @@ def parse_pets_owners_logins(folderpath):
 
 def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
-    owner_num = 0
-    for owner in owners_logins:
+    owner_num = 742
+    for owner in owners_logins[742:]:
         owner_num += 1
         try:
             i = 0 # We calculate only first 100 photos from account to make parsing faster
@@ -70,3 +70,7 @@ def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
 owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/From')
 owners_images = download_owners_images(owners_logins)
+
+
+
+
