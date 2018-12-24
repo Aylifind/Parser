@@ -3,7 +3,7 @@ import os
 import numpy as np
 
 USER = "andrey1295"
-PROFILE = "cats_of_instagram"
+PROFILE = "dogsofinstagram"
 
 L = instaloader.Instaloader(download_pictures=True, # для постов поменять на False
                             download_videos=False,
@@ -11,16 +11,21 @@ L = instaloader.Instaloader(download_pictures=True, # для постов пом
                             download_video_thumbnails=False,
                             download_comments=False,
                             save_metadata=False,
-                            post_metadata_txt_pattern='')
-
+                            post_metadata_txt_pattern='') # ЗАкомментировать при скачивании никнеймов из постов
+                            #post_metadata_txt_pattern='{caption}') # РАСкомментировать при скачивании никнеймов из постов
 
 
 def download_posts():
     profile = instaloader.Profile.from_username(L.context, PROFILE)
     for post in profile.get_posts():
-        L.download_post(post, 'From') # 'From' - навазние папки с описанием постов
+        L.download_post(post, 'dogs') # 'dogs' - сюда будут сохраниться .txt с постом-текстом
+
 
 #download_posts()
+
+
+
+
 
 def parse_pets_owners_logins(folderpath):
     """
@@ -49,8 +54,8 @@ def parse_pets_owners_logins(folderpath):
 
 def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
-    owner_num = 742
-    for owner in owners_logins[742:]:
+    owner_num = 0
+    for owner in owners_logins[0:]:
         owner_num += 1
         try:
             i = 0 # We calculate only first 100 photos from account to make parsing faster
@@ -66,11 +71,5 @@ def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
     return None
 
 
-
-
-owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/From')
+owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/dogs')
 owners_images = download_owners_images(owners_logins)
-
-
-
-
