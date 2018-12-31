@@ -1,9 +1,18 @@
+"""
+1. Поменять PROFILE на необходимый.
+2. Поменять два последних атрибута для объекта L. 
+Если скачиваем посты, то должен быть включён последний пост; если скачиваем уже фото - то предпоследний.
+3. Включить вызов двух последних функций (если скачиваем фото) и отключаем вызов (если скачиваем посты)
+4. Если скачиваем посты - включаем вызов функции download_posts.
+5. При скачивании фото ставим download_pictures=True. А если скачиваем почты, то этому же атрибуту ставим False.
+"""
+
 import instaloader
 import os
 import numpy as np
 
 USER = "andrey1295"
-PROFILE = "dogsofinstagram"
+PROFILE = "dogs_of_world_"
 
 L = instaloader.Instaloader(download_pictures=True, # для постов поменять на False
                             download_videos=False,
@@ -11,17 +20,18 @@ L = instaloader.Instaloader(download_pictures=True, # для постов пом
                             download_video_thumbnails=False,
                             download_comments=False,
                             save_metadata=False,
-                            post_metadata_txt_pattern='') # ЗАкомментировать при скачивании никнеймов из постов
+                            post_metadata_txt_pattern='') # РАСкомментировать при скачивании фото
                             #post_metadata_txt_pattern='{caption}') # РАСкомментировать при скачивании никнеймов из постов
 
 
 def download_posts():
     profile = instaloader.Profile.from_username(L.context, PROFILE)
     for post in profile.get_posts():
-        L.download_post(post, 'dogs') # 'dogs' - сюда будут сохраниться .txt с постом-текстом
+        L.download_post(post, 'dogs_') # 'dogs' - сюда будут сохраниться .txt с постом-текстом
 
 
 #download_posts()
+
 
 
 
@@ -31,6 +41,7 @@ def parse_pets_owners_logins(folderpath):
     """
     Пробегаю по всем папкам папок и ищу среди них логины в текстовых файлах, которые и буду парсить
     """
+
     owners_logins = np.empty(0)
     for dirpath, dirnames, filenames in os.walk(folderpath):
         for filename in filenames:
@@ -48,13 +59,19 @@ def parse_pets_owners_logins(folderpath):
 
     # Удаляем значок @
     owners_logins = [owner_login[1:] for owner_login in owners_logins]
-    owners_logins = [login[:-1] for login in owners_logins if login.endswith(':') or login.endswith(')') or login.endswith('.')]
+    # Если в никнейм попало что-то из спеицальных знаков, то обрезаем их
+    owners_logins = [login[:-1] for login in owners_logins if login.endswith(':') or 
+                                                              login.endswith(')') or 
+                                                              login.endswith('.') or
+                                                              login.endswith(',')]
     return owners_logins
+
 
 
 def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
     owner_num = 0
+    print(owners_logins)
     for owner in owners_logins[0:]:
         owner_num += 1
         try:
@@ -69,7 +86,8 @@ def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
         except:
             continue
     return None
+  
 
 
-owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/dogs')
+owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/dogs_')
 owners_images = download_owners_images(owners_logins)
