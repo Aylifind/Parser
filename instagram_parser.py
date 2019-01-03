@@ -95,3 +95,4 @@ def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
 owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/{}'.format(PROFILE))
 owners_images = download_owners_images(owners_logins)
+
