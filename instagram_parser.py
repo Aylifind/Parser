@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 1. Поменять PROFILE на необходимый.
 2. Поменять два последних атрибута для объекта L. 
@@ -12,7 +13,7 @@ import os
 import numpy as np
 
 USER = "andrey1295"
-PROFILE = "dogs_of_world_"
+PROFILE = "dogs_of_day"
 
 L = instaloader.Instaloader(download_pictures=True, # для постов поменять на False
                             download_videos=False,
@@ -27,7 +28,7 @@ L = instaloader.Instaloader(download_pictures=True, # для постов пом
 def download_posts():
     profile = instaloader.Profile.from_username(L.context, PROFILE)
     for post in profile.get_posts():
-        L.download_post(post, 'dogs_') # 'dogs' - сюда будут сохраниться .txt с постом-текстом
+        L.download_post(post, PROFILE) # 'dogs' - сюда будут сохраниться .txt с постом-текстом
 
 
 #download_posts()
@@ -46,6 +47,7 @@ def parse_pets_owners_logins(folderpath):
     for dirpath, dirnames, filenames in os.walk(folderpath):
         for filename in filenames:
             filename = os.path.join(dirpath, filename)
+            print(filename)
             if ('.txt' in filename) and ('UTC' in filename):
                 with open(filename, 'r') as f:
                     try:
@@ -59,12 +61,13 @@ def parse_pets_owners_logins(folderpath):
 
     # Удаляем значок @
     owners_logins = [owner_login[1:] for owner_login in owners_logins]
-    # Если в никнейм попало что-то из спеицальных знаков, то обрезаем их
-    owners_logins = [login[:-1] for login in owners_logins if login.endswith(':') or 
-                                                              login.endswith(')') or 
-                                                              login.endswith('.') or
-                                                              login.endswith(',')]
+    #owners_logins = [login[:-1] for login in owners_logins if login.endswith(':') or 
+    #                                                          login.endswith(')') or 
+    #                                                          login.endswith('.') or
+    #                                                          login.endswith(',')]
+    print(owners_logins)
     return owners_logins
+
 
 
 
@@ -85,9 +88,10 @@ def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
                     break
         except:
             continue
-    return None
-  
+    #return None
 
 
-owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/dogs_')
+
+
+owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/{}'.format(PROFILE))
 owners_images = download_owners_images(owners_logins)
