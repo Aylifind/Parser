@@ -16,8 +16,8 @@ MODELS = {
     #"vgg16": VGG16,
     #"vgg19": VGG19,
     #"inception": InceptionV3,
-    "xception": Xception,
-    #"resnet": ResNet50
+    #"xception": Xception,
+    "resnet": ResNet50
 }
 
 cats_labels = ['tabby', 'tabby_cat', 'tiger_cat', 'Persian_cat', 'Siamese_cat', 'Siamese', 'Egyptian_cat']
@@ -28,7 +28,7 @@ dogs_labels = ['Newfoundland', 'Newfoundland_dog', 'Eskimo_dog', 'husky', 'dalma
 
 
 image_paths = []
-folderpath = '/Users/user/Desktop/xception/'
+folderpath = '/Users/user/Desktop/21-1000/'
 
 
 for dirpath, dirnames, filenames in os.walk(folderpath):
@@ -86,7 +86,13 @@ for model_name, model in zip(list(MODELS.keys()), MODELS.keys()):
         else:
             new_label.append('{}_0.jpg'.format(counter))
             new_label = '/'.join(new_label)
-            os.rename(image_path, new_label)
+            #os.rename(image_path, new_label)    # в случае обычного переименования до <имя_файла>_0
+
+            # если нужно отфильтровать выборку
+            try:
+                os.remove(image_path)
+            except:
+                os.rename(image_path, new_label)
 
 
 
