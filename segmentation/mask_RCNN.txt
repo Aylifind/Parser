@@ -1,0 +1,2 @@
+Запуск внутри папки samples в файле demo.ipynb
+https://yadi.sk/d/Sem560G76T-Oow
