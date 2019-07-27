@@ -14,7 +14,7 @@ import os
 import numpy as np
 
 USER = "andrey1295"
-PROFILE = "dogs_of_day"
+PROFILE = "cats_of_instagram"#"dogs_of_day"
 
 L = instaloader.Instaloader(download_pictures=True, # для постов поменять на False
                             download_videos=False,
@@ -62,10 +62,10 @@ def parse_pets_owners_logins(folderpath):
 
     # Удаляем значок @
     owners_logins = [owner_login[1:] for owner_login in owners_logins]
-    #owners_logins = [login[:-1] for login in owners_logins if login.endswith(':') or 
-    #                                                          login.endswith(')') or 
-    #                                                          login.endswith('.') or
-    #                                                          login.endswith(',')]
+    owners_logins = [login[:-1] for login in owners_logins if login.endswith(':') or 
+                                                              login.endswith(')') or 
+                                                              login.endswith('.') or
+                                                              login.endswith(',')]
     print(owners_logins)
     return owners_logins
 
@@ -74,9 +74,9 @@ def parse_pets_owners_logins(folderpath):
 
 def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
-    owner_num = 0
+    owner_num = 806
     print(owners_logins)
-    for owner in owners_logins[0:]:
+    for owner in owners_logins[806:]:
         owner_num += 1
         try:
             i = 0 # We calculate only first 100 photos from account to make parsing faster
@@ -94,6 +94,5 @@ def download_owners_images(owners_logins, num_of_pictures_per_profile=100):
 
 
 
-owners_logins = parse_pets_owners_logins('/Users/user/Desktop/parser/{}'.format(PROFILE))
+owners_logins = parse_pets_owners_logins('/Users/user/Parser/{}'.format(PROFILE))
 owners_images = download_owners_images(owners_logins)
-
