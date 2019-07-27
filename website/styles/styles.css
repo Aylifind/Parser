@@ -1,0 +1,50 @@
+body {
+    background-color: #FFFFFF;
+}
+
+a { /* Цвет ссылок */
+    color: darkolivegreen;
+}
+
+.text {
+    font-family: Tahoma;
+    font-size: 30px;
+    float: right;
+    margin-right: 40px;
+}
+
+#header ul {
+    font-family: Tahoma;
+    font-size: 18px;
+    list-style: none;
+    float: right;
+    margin-right: 30px;
+}
+
+#header ul li {
+    float: right;
+    padding: 5px 50px 30px 50px;
+}
+
+#header ul li a {
+    text-decoration: none;
+    margin: 10px;
+    display: block;
+}
+
+#header ul li a:hover { /* всё, что будет при наведении */
+    outline: 2px solid green; /* рамка вокруг надписи */
+    outline-offset: 5px;
+}
+
+#logo_align {
+    padding-left: 30px;
+}
+
+
+
+
+
+
+
+
