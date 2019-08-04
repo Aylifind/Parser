@@ -7,28 +7,30 @@ a { /* Цвет ссылок */
 }
 
 .text {
-    font-family: Tahoma;
+    font-family: 'Open Sans', sans-serif;
     font-size: 30px;
     float: right;
     margin-right: 40px;
 }
 
 #header ul {
-    font-family: Tahoma;
+    font-family: 'Open Sans', sans-serif;
+    margin: auto;
     font-size: 18px;
     list-style: none;
     float: right;
-    margin-right: 30px;
 }
 
 #header ul li {
     float: right;
-    padding: 5px 50px 30px 50px;
+    padding: 0px 50px 20px 50px;
+    margin: 2px;
+    text-decoration: underline;
 }
 
 #header ul li a {
     text-decoration: none;
-    margin: 10px;
+    margin: 7px;
     display: block;
 }
 
@@ -38,13 +40,25 @@ a { /* Цвет ссылок */
 }
 
 #logo_align {
-    padding-left: 30px;
+    padding-left: 20px;
 }
 
+#info_align {
+    margin-top: -175px;
+    float: right;
+    margin-right: 255px;
+    margin-bottom: 200px;
+}
 
-
-
-
+input[type=submit] { /* кнопка Отправить */
+    padding:5px 15px; 
+    font-family: Arial;
+    font-size: 16px;
+    background:#66b266; 
+    color:aliceblue;
+    cursor:pointer;
+    border-radius: 5px; 
+}
 
 
 
