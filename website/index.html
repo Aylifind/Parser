@@ -3,13 +3,17 @@
     <head>
         <title>Сервис по поиску домашних животных</title>
         <meta charset='utf-8'>
-        <link href="styles/styles.css" rel='stylesheet' type='text/css'>
+        <link href="static/styles/styles.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     </head>
     
     <body>
+        
         <h1>
             <div class='text'>
                 <b>Сервис по поиску домашних животных</b>
+                <hr>
             </div>
         </h1>
         
@@ -18,19 +22,63 @@
                 <ul>
                     <li><a href='https://google.ru'>Контакты</a></li>
                     <li><a href='https://google.ru'>Статьи</a></li>
-                    <li><a href='https://google.ru'>Главная</a></li>
+                    <li><a href='index.html'>Главная</a></li>
                 </ul>
             </div>
             <div id='logo_align'>
-                <img src="images/logo_075.png" alt="Изображение не подгрузилось"><br>
+                <img src="{{url_for('static', filename='images/logo_075.png')}}" alt="Изображение не подгрузилось"><br>
             </div>
         </div>
         
-        
-        
-        <fieldset>
-            <legend>Загрузите фотографии в эту форму</legend>
-            Файл: <input type="file" accept="image/*" multiple><br>
-        </fieldset>
+        <div id='info_align'>
+            <fieldset>
+                <legend><b>Заполните информацию о пропавшем питомце</b></legend>
+
+                <form action="/upload" autocomplete="on" method="POST" enctype="multipart/form-data">
+                    <br>
+                    
+                    1. Вы потеряли или нашли питомца?<br>
+                    <label><input type="radio" name="found_lost" value="lost"   > Потерял(а)</label>
+                    <label><input type="radio" name="found_lost" value="lost"   > Нашёл(-ла) </label>
+                    <br>
+                    <br>
+                    
+                    2. У меня:<br>
+                    <label><input type="radio" name="pet" value="cat"   > Кошка</label><br>
+                    <label><input type="radio" name="pet" value="dog"   > Собака </label><br>
+                    <br>
+                    
+                    3. Выберите город:<br>
+                    <select name="location" id=""   >
+                        <option disabled selected>Не выбран</option>
+                        <option>Тула</option>
+                        <option>Заокский</option>
+                    </select>
+                    <br>
+                    <br>
+                    
+                    4. Выберите дату: <font size="-5">(в браузере Safari записывать в виде ГГГГ-ММ-ДД)</font>
+                    <p><input id="today" type="date"></p>
+                    <br>
+                    
+                    5. Загрузите фотографии (чем больше - тем лучше):<br>
+                    <font size="-5">Для выбора нескольких фото удерживайте клавишу <b>Ctrl</b>.</font><br>
+                    <input type="file" id="files" name="files[]" multiple/>
+                    <output id="list"></output>
+                    <br>
+                    <br>
+                    
+                    6. Окрас животного:<br>
+                    <textarea name="addit_info" cols="50", rows="1"></textarea><br>
+                    <br>
+                    
+                    7. Приметы, прочая информация:<br>
+                    <textarea name="addit_info" cols="90", rows="8"></textarea>
+                    <p><input type="reset"> <input type="submit" name='action'></p>
+                    
+                </form>
+                Обработка занимает в среднем 10 минут при скорости соединения 10 мбайт/с.
+            </fieldset>
+        </div>
     </body>
 </html>
