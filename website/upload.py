@@ -11,19 +11,37 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
 def index():
-	return render_template('index.html')
+    return render_template('index.html')
 
 
 @app.route('/upload', methods=['POST'])
-def upload():
+def upload_file():
     if request.method == 'POST':
-    	files = request.files.getlist('files[]')
-    	for file in files:
-    		file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
-    	return 'Upload completed.'
+        lost_or_found = request.form.get('lost_found')
+        pet = request.form.get('pet')
+        location = request.form.get('location')
+        date = request.form.get('date')
+        color = request.form.get('color')
+        addit_info = request.form.get('addit_info')
+    
+        files = request.files.getlist('files[]')
+        for file in files:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+
+        return '''
+                Upload completed. <br> 
+                <br>
+                Lost or found: {} <br>
+                Pet: {} <br>
+                Location: {} <br>
+                Date: {} <br>
+                Color is {} <br>
+                Addit info: {} <br>
+               '''.format(lost_or_found, pet, location, date, color, addit_info)
     return render_template('upload.html')
 
 
+
 if __name__ == '__main__':
-	app.run(debug=True)
+    app.run(debug=True)
 
