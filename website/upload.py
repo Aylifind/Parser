@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/user/Desktop/website/d
 db = SQLAlchemy(app)
 
 
-class FileContents(db.Model):
+class Clients(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(300))   # 300 - максимальная длина строки
     data = db.Column(db.LargeBinary)
@@ -22,18 +22,20 @@ def index():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     db.create_all()   # создать базу данных
-    if request.method == 'POST':
-        lost_or_found = request.form.get('lost_found')
-        pet = request.form.get('pet')
-        location = request.form.get('location')
-        date = request.form.get('date')
-        color = request.form.get('color')
-        addit_info = request.form.get('addit_info')
-        files = request.files.getlist('files[]')
-        for file in files:
-            newFile = FileContents(name=file.filename, data=file.read())
-            db.session.add(newFile)
-            db.session.commit()
+
+    lost_or_found = request.form.get('lost_found')
+    pet = request.form.get('pet')
+    location = request.form.get('location')
+    date = request.form.get('date')
+    color = request.form.get('color')
+    addit_info = request.form.get('addit_info')
+    files = request.files.getlist('files[]')
+
+
+    for file in files:
+        newFile = Clients(name=file.filename, data=file.read())
+        db.session.add(newFile)
+        db.session.commit()
 
         return '''
                 Upload completed. <br> 
