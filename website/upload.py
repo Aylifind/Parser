@@ -35,7 +35,7 @@ def upload_file():
                 Pet: {} <br>
                 Location: {} <br>
                 Date: {} <br>
-                Color is {} <br>
+                Color: {} <br>
                 Addit info: {} <br>
                '''.format(lost_or_found, pet, location, date, color, addit_info)
     return render_template('upload.html')
