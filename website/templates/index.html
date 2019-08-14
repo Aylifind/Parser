@@ -3,34 +3,36 @@
     <head>
         <title>Сервис по поиску домашних животных</title>
         <meta charset='utf-8'>
-        <link href="static/styles/styles.css" rel="stylesheet" type="text/css">
+        <link href="styles.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     </head>
     
     <body>
+    <div id='container'>
         
-        <h1>
+        <div id='header'>
             <div class='text'>
                 <b>Сервис по поиску домашних животных</b>
                 <hr>
+                <div class='menu'>
+                    <ul>
+                        <li><a href='https://google.ru'>Контакты</a></li>
+                        <li><a href='https://google.ru'>Статьи</a></li>
+                        <li><a href='index.html'>Главная</a></li>
+                    </ul>
+                </div>
             </div>
-        </h1>
-        
-        <div id='page_align'>
-            <div id='header'>
-                <ul>
-                    <li><a href='https://google.ru'>Контакты</a></li>
-                    <li><a href='https://google.ru'>Статьи</a></li>
-                    <li><a href='index.html'>Главная</a></li>
-                </ul>
-            </div>
-            <div id='logo_align'>
-                <img src="{{url_for('static', filename='images/logo_075.png')}}" alt="Изображение не подгрузилось"><br>
+            
+            <div class='logo_align'>
+                <img src='logo_075.png' alt="Изображение не подгрузилось"><br>
             </div>
         </div>
         
-        <div id='info_align'>
+        
+
+        
+        <div id='content'>
             <fieldset>
                 <legend><b>Заполните информацию о пропавшем питомце</b></legend>
 
@@ -80,5 +82,12 @@
                 Обработка занимает в среднем 10 минут при скорости соединения 10 мбайт/с.
             </fieldset>
         </div>
+        
+        <div id='footer'>
+        2017-2019
+        </div>
+        
+        
+    </div>
     </body>
 </html>
