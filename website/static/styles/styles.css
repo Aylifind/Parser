@@ -44,6 +44,7 @@ a { /* Цвет ссылок */
 }
 
 #info_align {
+    font-family: 'Helvetica';
     margin-top: -175px;
     float: right;
     margin-right: 255px;
@@ -59,6 +60,3 @@ input[type=submit] { /* кнопка Отправить */
     cursor:pointer;
     border-radius: 5px; 
 }
-
-
-
