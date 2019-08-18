@@ -1,7 +1,7 @@
 import glob
 import os
 
-folder_path = '/Users/user/Desktop/Misha/'
+folder_path = '/Users/user/Desktop/<your_folder>/'
 
 
 def rename(folder_path):
