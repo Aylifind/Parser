@@ -1,4 +1,5 @@
-from keras.applications import ResNet50, InceptionV3, Xception, VGG16, VGG19
+from keras.applications.nasnet import NASNetLarge
+from keras.applications.inception_resnet_v2 import InceptionResNetV2
 from keras.applications import imagenet_utils
 from keras.applications.inception_v3 import preprocess_input
 from keras.preprocessing.image import img_to_array
@@ -17,7 +18,9 @@ MODELS = {
     #"vgg19": VGG19,
     #"inception": InceptionV3,
     #"xception": Xception,
-    "resnet": ResNet50
+    #"resnet": ResNet50,
+    #"NASNet": NASNetLarge,
+    "InceptionResNetV2": InceptionResNetV2
 }
 
 cats_labels = ['tabby', 'tabby_cat', 'tiger_cat', 'Persian_cat', 'Siamese_cat', 'Siamese', 'Egyptian_cat']
@@ -28,7 +31,7 @@ dogs_labels = ['Newfoundland', 'Newfoundland_dog', 'Eskimo_dog', 'husky', 'dalma
 
 
 image_paths = []
-folderpath = '/Users/user/Desktop/21-1000/'
+folderpath = '/Users/user/Desktop/aylifind/classification/InceptionResNetV2/InceptionResNetV2_complicated/'
 
 
 for dirpath, dirnames, filenames in os.walk(folderpath):
@@ -37,14 +40,16 @@ for dirpath, dirnames, filenames in os.walk(folderpath):
 
 
 for model_name, model in zip(list(MODELS.keys()), MODELS.keys()):
-    inputShape = (224, 224)
-    preprocess = imagenet_utils.preprocess_input
-
-    if model in ("inception", "xception"):
+    if model in ("inception", "xception", "InceptionResNetV2"):
         inputShape = (299, 299)
         preprocess = preprocess_input
+    elif model in ("NASNet"):
+        inputShape = (331, 331)
+        preprocess = preprocess_input
+    else:
+        inputShape = (224, 224)
+        preprocess = imagenet_utils.preprocess_input
 
-    #print('[INFO]: Loading {}'.format(MODELS[model]))
     Network = MODELS[model] # to recheck
     model = Network(weights="imagenet")
 
@@ -79,34 +84,19 @@ for model_name, model in zip(list(MODELS.keys()), MODELS.keys()):
                 target_sum += 0
 
         new_label = image_path.split('/')[0:-1]
+        print(new_label)
         if target_sum > 0:
-            new_label.append('{}_1.jpg'.format(counter))
+            new_label.append('__{}_1.jpg'.format(counter))
             new_label = '/'.join(new_label)
             os.rename(image_path, new_label)
         else:
-            new_label.append('{}_0.jpg'.format(counter))
+            new_label.append('__{}_0.jpg'.format(counter))
             new_label = '/'.join(new_label)
-            #os.rename(image_path, new_label)    # в случае обычного переименования до <имя_файла>_0
+            os.rename(image_path, new_label)    # в случае обычного переименования до <имя_файла>_0
 
             # если нужно отфильтровать выборку
-            try:
-                os.remove(image_path)
-            except:
-                os.rename(image_path, new_label)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            #try:
+            #    os.remove(image_path)
+            #except:
+            #    os.rename(image_path, new_label)
 
