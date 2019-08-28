@@ -17,11 +17,13 @@ for image in os.listdir(input_folder):
     print(input_folder + image)
     print(output_folder + image)
     custom = detector.CustomObjects(cat=True)
+    start = time.time()
     detections = detector.detectCustomObjectsFromImage(input_image=input_folder + image, 
                                                        output_image_path=output_folder + image,
                                                        custom_objects=custom, 
                                                        minimum_percentage_probability=70)
-
+    print("processing time: ", time.time() - start)
+    
     for eachObject in detections:
         try:
             print(eachObject["name"] , " : ", eachObject["percentage_probability"], " : ", eachObject["box_points"] )
